@@ -30,4 +30,4 @@ lines.forEach(line => {
 })
 
 console.log(`Part 1: ${part1}`)
-console.log(`Part 2: ${zeroed}`) // totally made up multiplier
+console.log(`Part 2: ${zeroed}`)
