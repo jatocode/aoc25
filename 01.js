@@ -6,6 +6,7 @@ const lines = data.split('\n')
 
 let dial = 50
 let zeroed = 0
+let part1 = 0
 lines.forEach(line => {
     const match = line.match(/(L|R)(\d+)/)
     if (match) {
@@ -23,9 +24,10 @@ lines.forEach(line => {
                 if (dial === 0) zeroed += 1
             }
         }
-        console.log(`After ${line.trim()}, dial is at: ${dial}, zeroed: ${zeroed}`)
+        if (dial == 0) part1++
+//      console.log(`After ${line.trim()}, dial is at: ${dial}, zeroed: ${zeroed}`)
     }
 })
 
-console.log(`Dial ended at: ${dial}`)
-console.log(`Dial hit zero ${zeroed} times`)
+console.log(`Part 1: ${part1}`)
+console.log(`Part 2: ${zeroed}`) // totally made up multiplier
