@@ -16,14 +16,36 @@ ranges.forEach(range => {
         const num = i.toString()
         const seq1 = num.substring(0, num.length / 2)
         const seq2 = num.slice(-num.length / 2)
-        // console.log(`Comparing ${num} ${seq1} to ${seq2}`)
 
         // Bara jämna annars blir det jättedåligt
         if(seq1 === seq2 && num.length % 2 === 0) {
-          //  console.log(`Found matching sequence: ${num} in range ${range.min}-${range.max}`)
             part1 += i
         }
     }
 })
 
 console.log(`Part 1: ${part1}`)
+
+let part2 = 0
+let invalids = []
+ranges.forEach(range => {
+    const min = parseInt(range.min)
+    const max = parseInt(range.max)
+    for (let i = min; i <= max; i++) {
+        const num = i.toString()
+        const maxSeqLength = Math.ceil(num.length / 2)
+        for(let seqLength = 1; seqLength <= maxSeqLength; seqLength++) {
+            const seq = num.substring(0, seqLength)
+            let regex = new RegExp("^(?:" + seq + ")+$", "g");
+            const found = regex.test(num);
+            if(found && num.length > 1 && !invalids[num]) {
+                invalids[num] = true
+            }
+        }
+    }
+})
+Object.keys(invalids).forEach(key => {
+    part2 += parseInt(key)
+})
+
+console.log(`Part 2: ${part2}`)
