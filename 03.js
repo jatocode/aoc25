@@ -17,32 +17,29 @@ banks.forEach(bank => {
     }
     totalJoltage += max
 
-    let max2 = 0
-    for (let i = 0; i < jolts.length; i++) {
-        let joltage = jolts[i]
-        for (let j = i + 1; j < jolts.length; j++) {
-            var next = jolts[j + 1]
-            if(next && parseInt(next) > parseInt(joltage)) {
-                joltage += next
-            } else {
-                joltage += jolts[j]
+    let joltage2 = bank.split('')
+    while (joltage2.length > 12) {
+        let removed = false
+        for (let i = 0; i < joltage2.length; i += 1) {
+            let curr = parseInt(joltage2[i])
+            let next = parseInt(joltage2[i + 1])
+            if (curr < next) {
+                joltage2.splice(i, 1)
+               // console.log(joltage2.join(''))
+                removed = true
+                break
             }
-            const joltage2 = parseInt(joltage)
-            if (joltage2 > max2) max2 = joltage2
+        }
+
+        if (!removed) {
+            joltage2 = joltage2.slice(0, 12)
+            break
         }
     }
-    totalJoltage2 += max2
-    console.log(`Bank ${bank} max joltage: ${max2} total so far: ${totalJoltage2}`)
+    const joltageFinal = parseInt(joltage2.join(''))
+    // console.log('Bank', bank, joltageFinal, joltage2.length)
+    totalJoltage2 += parseInt(joltageFinal)
 })
 
 console.log('Del 1:', totalJoltage)
 console.log('Del 2:', totalJoltage2)
-
-987654321111111
-987654321111
-811111111111119
-811111111119
-244234234234278
-434234234278
-818181911112111
-888911112111
