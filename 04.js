@@ -10,29 +10,50 @@ lines.forEach(line => {
     grid.push(line.split(''))
 })
 
-for(let y = 0; y < grid.length; y++) {
-    for(let x = 0; x < grid[y].length; x++) {
-        if(grid[y][x] !== '@') continue
-        const neighs = neighbours(x,y, grid).filter(n => n == '@')
+// Del 1
+for (let y = 0; y < grid.length; y++) {
+    for (let x = 0; x < grid[y].length; x++) {
+        if (grid[y][x] !== '@') continue
+        const neighs = neighbours(x, y, grid).filter(n => n == '@')
         //console.log(x,y, neighs.length)
-        if(neighs.length < 4) part1++
+        if (neighs.length < 4) part1++
+    }
+}
+
+// Del 2
+let part2 = 0
+let removed = true
+while (removed) {
+    removed = false
+    for (let y = 0; y < grid.length; y++) {
+        for (let x = 0; x < grid[y].length; x++) {
+            if (grid[y][x] !== '@') continue
+            const neighs = neighbours(x, y, grid).filter(n => n == '@')
+            //console.log(x,y, neighs.length)
+            if (neighs.length < 4) {
+                grid[y][x] = '.'
+                part2++
+                removed = true
+            }
+        }
     }
 }
 
 console.log(`Part 1: `, part1)
+console.log(`Part 2: `, part2)
 
-function neighbours(x,y, grid) {
+function neighbours(x, y, grid) {
     const deltas = [
         [-1, -1], [0, -1], [1, -1],
-        [-1, 0],           [1, 0],
-        [-1, 1],  [0, 1],  [1, 1],
+        [-1, 0], [1, 0],
+        [-1, 1], [0, 1], [1, 1],
     ]
     let neighs = []
     deltas.forEach(delta => {
         const nx = x + delta[0]
         const ny = y + delta[1]
         //console.log('  ', nx, ny, grid[ny] ? grid[ny][nx] : null)
-        if(grid[ny] && grid[ny][nx] !== undefined) {
+        if (grid[ny] && grid[ny][nx] !== undefined) {
             neighs.push(grid[ny][nx])
         }
     })
