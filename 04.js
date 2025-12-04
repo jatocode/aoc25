@@ -15,7 +15,6 @@ for (let y = 0; y < grid.length; y++) {
     for (let x = 0; x < grid[y].length; x++) {
         if (grid[y][x] !== '@') continue
         const neighs = neighbours(x, y, grid).filter(n => n == '@')
-        //console.log(x,y, neighs.length)
         if (neighs.length < 4) part1++
     }
 }
@@ -29,7 +28,6 @@ while (removed) {
         for (let x = 0; x < grid[y].length; x++) {
             if (grid[y][x] !== '@') continue
             const neighs = neighbours(x, y, grid).filter(n => n == '@')
-            //console.log(x,y, neighs.length)
             if (neighs.length < 4) {
                 grid[y][x] = '.'
                 part2++
@@ -45,14 +43,13 @@ console.log(`Part 2: `, part2)
 function neighbours(x, y, grid) {
     const deltas = [
         [-1, -1], [0, -1], [1, -1],
-        [-1, 0], [1, 0],
-        [-1, 1], [0, 1], [1, 1],
+        [-1, 0],           [1, 0],
+        [-1, 1],  [0, 1],  [1, 1],
     ]
     let neighs = []
     deltas.forEach(delta => {
         const nx = x + delta[0]
         const ny = y + delta[1]
-        //console.log('  ', nx, ny, grid[ny] ? grid[ny][nx] : null)
         if (grid[ny] && grid[ny][nx] !== undefined) {
             neighs.push(grid[ny][nx])
         }

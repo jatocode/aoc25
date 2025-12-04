@@ -25,7 +25,6 @@ banks.forEach(bank => {
             let next = parseInt(joltage2[i + 1])
             if (curr < next) {
                 joltage2.splice(i, 1)
-               // console.log(joltage2.join(''))
                 removed = true
                 break
             }
@@ -36,9 +35,7 @@ banks.forEach(bank => {
             break
         }
     }
-    const joltageFinal = parseInt(joltage2.join(''))
-    // console.log('Bank', bank, joltageFinal, joltage2.length)
-    totalJoltage2 += parseInt(joltageFinal)
+    totalJoltage2 += parseInt(joltage2.join(''))
 })
 
 console.log('Del 1:', totalJoltage)
