@@ -24,4 +24,33 @@ ingredients.forEach(ingredient => {
     }
 })
 
+const mergedRanges = mergeRanges(ranges)
+console.log('Merged Ranges left:', mergedRanges.length)
+let part2 = 0
+mergedRanges.forEach(range => {
+    part2 += (range.max - range.min + 1)
+})
+
+function mergeRanges(ranges) {
+    if (ranges.length === 0) return []
+
+    let merged = []
+    let currmin = ranges[0].min
+    let currmax = ranges[0].max
+
+    for (let i = 1; i < ranges.length; i++) {
+        if(ranges[i].min <= currmax) {
+            currmax = Math.max(currmax, ranges[i].max)
+        } else {
+            merged.push({ min: currmin, max: currmax })
+            currmin = ranges[i].min
+            currmax = ranges[i].max
+        }
+    }
+    merged.push({ min: currmin, max: currmax })
+    return merged
+}
+
 console.log(`Part 1: `, part1)
+console.log(`Part 2: `, part2)
+
