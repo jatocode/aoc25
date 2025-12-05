@@ -1,7 +1,7 @@
-const fs = require('fs')
+import { readFileSync } from 'fs'
 const args = process.argv.slice(2)
 
-const data = (fs.readFileSync(args[0], 'utf8'))
+const data = (readFileSync(args[0], 'utf8'))
 const lines = data.split('\n')
 
 let part1 = 0
